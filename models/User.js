@@ -4,21 +4,22 @@ const UserSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      require: true,
-      min: 3,
-      max: 20,
+      required: true, // Corrected from 'require' to 'required'
+      minlength: 3,
+      maxlength: 20,
       unique: true,
     },
     email: {
       type: String,
       required: true,
-      max: 50,
+      maxlength: 50,
       unique: true,
+      match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, // Example regex for email format validation
     },
     password: {
       type: String,
       required: true,
-      min: 6,
+      minlength: 6,
     },
     profilePicture: {
       type: String,
@@ -29,11 +30,11 @@ const UserSchema = new mongoose.Schema(
       default: "",
     },
     followers: {
-      type: Array,
+      type: [String], // Array of Strings (assuming array of userIds or usernames)
       default: [],
     },
     followings: {
-      type: Array,
+      type: [String], // Array of Strings (assuming array of userIds or usernames)
       default: [],
     },
     isAdmin: {
@@ -42,11 +43,11 @@ const UserSchema = new mongoose.Schema(
     },
     desc: {
       type: String,
-      max: 50,
+      maxlength: 50,
     },
     city: {
       type: String,
-      max: 50,
+      maxlength: 50,
     },
   },
   { timestamps: true }
